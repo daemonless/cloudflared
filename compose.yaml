@@ -1,0 +1,30 @@
+name: cloudflared
+
+x-daemonless:
+  title: "Cloudflared"
+  icon: ":simple-cloudflare:"
+  category: "Infrastructure"
+  description: "Cloudflare Tunnel client for exposing services securely."
+  upstream_url: "https://github.com/cloudflare/cloudflared"
+  web_url: "https://developers.cloudflare.com/cloudflare-one/connections/connect-apps"
+  freshports_url: "https://www.freshports.org/net/cloudflared/"
+  user: "root"
+  upstream_binary: false
+  
+  docs:
+    env:
+      TUNNEL_TOKEN: "Required: The Cloudflare Tunnel token."
+      TUNNEL_METRICS: "Optional: Address to bind metrics server (default: 0.0.0.0:2000)"
+
+services:
+  cloudflared:
+    image: ghcr.io/daemonless/cloudflared:latest
+    container_name: cloudflared
+    restart: unless-stopped
+    
+    environment:
+      - TUNNEL_TOKEN=YOUR_CLOUDFLARE_TOKEN_HERE
+      - TUNNEL_METRICS=0.0.0.0:2000
+
+    ports:
+      - "2000:2000"

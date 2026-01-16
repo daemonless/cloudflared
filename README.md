@@ -1,0 +1,72 @@
+# Cloudflared
+
+Cloudflare Tunnel client for exposing services securely.
+
+| | |
+|---|---|
+| **Port** | 2000 |
+| **Registry** | `ghcr.io/daemonless/cloudflared` |
+| **Source** | [https://github.com/cloudflare/cloudflared](https://github.com/cloudflare/cloudflared) |
+| **Website** | [https://developers.cloudflare.com/cloudflare-one/connections/connect-apps](https://developers.cloudflare.com/cloudflare-one/connections/connect-apps) |
+
+## Deployment
+
+### Podman Compose
+
+```yaml
+services:
+  cloudflared:
+    image: ghcr.io/daemonless/cloudflared:latest
+    container_name: cloudflared
+    environment:
+      - TUNNEL_TOKEN=YOUR_CLOUDFLARE_TOKEN_HERE
+      - TUNNEL_METRICS=0.0.0.0:2000
+    ports:
+      - 2000:2000
+    restart: unless-stopped
+```
+
+### Podman CLI
+
+```bash
+podman run -d --name cloudflared \
+  -p 2000:2000 \
+  -e TUNNEL_TOKEN=YOUR_CLOUDFLARE_TOKEN_HERE \
+  -e TUNNEL_METRICS=0.0.0.0:2000 \
+  ghcr.io/daemonless/cloudflared:latest
+```
+Access at: `http://localhost:2000`
+
+### Ansible
+
+```yaml
+- name: Deploy cloudflared
+  containers.podman.podman_container:
+    name: cloudflared
+    image: ghcr.io/daemonless/cloudflared:latest
+    state: started
+    restart_policy: always
+    env:
+      TUNNEL_TOKEN: "YOUR_CLOUDFLARE_TOKEN_HERE"
+      TUNNEL_METRICS: "0.0.0.0:2000"
+    ports:
+      - "2000:2000"
+```
+
+## Configuration
+### Environment Variables
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `TUNNEL_TOKEN` | `YOUR_CLOUDFLARE_TOKEN_HERE` | Required: The Cloudflare Tunnel token. |
+| `TUNNEL_METRICS` | `0.0.0.0:2000` | Optional: Address to bind metrics server (default: 0.0.0.0:2000) |
+### Ports
+
+| Port | Protocol | Description |
+|------|----------|-------------|
+| `2000` | TCP |  |
+
+## Notes
+
+- **User:** `root` (UID/GID set via PUID/PGID)
+- **Base:** Built on `ghcr.io/daemonless/base` (FreeBSD)

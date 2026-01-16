@@ -1,0 +1,15 @@
+#!/bin/sh
+# Cloudflared s6 service
+
+if [ -z "$TUNNEL_TOKEN" ]; then
+    echo "[ERROR] TUNNEL_TOKEN is not set. Exiting."
+    exit 1
+fi
+
+echo "[INFO] Starting cloudflared tunnel..."
+
+# Use --no-autoupdate as recommended for containers
+# Metrics are bound to 0.0.0.0 for easier health checking
+exec /usr/local/bin/cloudflared --no-autoupdate tunnel \
+    --metrics ${TUNNEL_METRICS:-0.0.0.0:2000} \
+    run --token "$TUNNEL_TOKEN"
