@@ -21,6 +21,7 @@ LABEL org.opencontainers.image.title="Cloudflared" \
 # Install cloudflared
 RUN pkg update && \
     pkg install -y ${PACKAGES} && \
+    mkdir -p /app && pkg info cloudflared | sed -n 's/.*Version.*: *//p' > /app/version && \
     pkg clean -ay && \
     rm -rf /var/cache/pkg/* /var/db/pkg/repos/*
 
