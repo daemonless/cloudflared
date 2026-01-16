@@ -15,7 +15,7 @@ LABEL org.opencontainers.image.title="Cloudflared" \
       io.daemonless.category="Infrastructure" \
       io.daemonless.port="2000" \
       io.daemonless.arch="${FREEBSD_ARCH}" \
-      io.daemonless.pkg-source="pkg" \
+      io.daemonless.pkg-source="containerfile" \
       io.daemonless.packages="${PACKAGES}"
 
 # Install cloudflared
