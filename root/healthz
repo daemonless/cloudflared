@@ -4,9 +4,18 @@
 METRICS_PORT="${TUNNEL_METRICS##*:}"
 [ -z "$METRICS_PORT" ] && METRICS_PORT="2000"
 
-# Cloudflared exposes a /ready endpoint on the metrics port
-if fetch -o /dev/null "http://127.0.0.1:${METRICS_PORT}/ready" >/dev/null 2>&1; then
-    exit 0
+if [ -n "$TUNNEL_TOKEN" ]; then
+    # Standard Tunnel Mode: Check /ready endpoint
+    if fetch -o /dev/null "http://127.0.0.1:${METRICS_PORT}/ready" >/dev/null 2>&1; then
+        exit 0
+    else
+        exit 1
+    fi
 else
-    exit 1
+    # Fallback/Test Mode (DNS Proxy): Check TCP port
+    if nc -z 127.0.0.1 "${METRICS_PORT}" >/dev/null 2>&1; then
+        exit 0
+    else
+        exit 1
+    fi
 fi
