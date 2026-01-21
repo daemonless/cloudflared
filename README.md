@@ -11,6 +11,7 @@ Cloudflare Tunnel client for exposing services securely.
 |---|---|
 | **Port** | 2000 |
 | **Registry** | `ghcr.io/daemonless/cloudflared` |
+| **Docs** | [daemonless.io/images/cloudflared](https://daemonless.io/images/cloudflared/) |
 | **Source** | [https://github.com/cloudflare/cloudflared](https://github.com/cloudflare/cloudflared) |
 | **Website** | [https://developers.cloudflare.com/cloudflare-one/connections/connect-apps](https://developers.cloudflare.com/cloudflare-one/connections/connect-apps) |
 
