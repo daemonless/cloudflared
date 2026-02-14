@@ -1,12 +1,12 @@
 {
   "image": "cloudflared",
-  "generated": "2026-02-14T14:19:32Z",
+  "generated": "2026-02-14T15:05:45Z",
   "tags": {
     "pkg": {
       "arch": "amd64",
       "app_version": "2025.8.0_6",
       "source": "pkg",
-      "generated": "2026-02-14T14:19:01Z",
+      "generated": "2026-02-14T15:05:35Z",
       "packages": {
         "freebsd": [
           {
