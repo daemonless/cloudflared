@@ -1,12 +1,12 @@
 {
   "image": "cloudflared",
-  "generated": "2026-02-14T21:40:09Z",
+  "generated": "2026-02-19T22:47:11Z",
   "tags": {
     "pkg-latest": {
       "arch": "amd64",
-      "app_version": "2025.8.0_7",
+      "app_version": "2026.2.0",
       "source": "pkg",
-      "generated": "2026-02-14T21:39:57Z",
+      "generated": "2026-02-19T22:43:03Z",
       "packages": {
         "freebsd": [
           {
@@ -131,7 +131,7 @@
           },
           {
             "name": "cloudflared",
-            "version": "2025.8.0_7"
+            "version": "2026.2.0"
           },
           {
             "name": "execline",
@@ -177,10 +177,6 @@
             "version": "v1.2.0"
           },
           {
-            "name": "github.com/apparentlymart/go-cidr",
-            "version": "v1.1.0"
-          },
-          {
             "name": "github.com/beorn7/perks",
             "version": "v1.0.1"
           },
@@ -191,14 +187,6 @@
           {
             "name": "github.com/chungthuang/quic-go",
             "version": "v0.45.1-0.20250428085412-43229ad201fd"
-          },
-          {
-            "name": "github.com/coredns/caddy",
-            "version": "v1.1.2-0.20241029205200-8de985351a98"
-          },
-          {
-            "name": "github.com/coredns/coredns",
-            "version": "v1.12.2"
           },
           {
             "name": "github.com/coreos/go-oidc/v3",
@@ -215,10 +203,6 @@
           {
             "name": "github.com/facebookgo/grace",
             "version": "v0.0.0-20180706040059-75cf19382434"
-          },
-          {
-            "name": "github.com/flynn/go-shlex",
-            "version": "v0.0.0-20150515145356-3f9db97f8568"
           },
           {
             "name": "github.com/fsnotify/fsnotify",
@@ -277,10 +261,6 @@
             "version": "v2.26.3"
           },
           {
-            "name": "github.com/grpc-ecosystem/grpc-opentracing",
-            "version": "v0.0.0-20180507213350-8e809c8a8645"
-          },
-          {
             "name": "github.com/ipostelnik/cli/v2",
             "version": "v2.3.1-0.20210324024421-b6ea8234fe3d"
           },
@@ -301,10 +281,6 @@
             "version": "v0.0.20"
           },
           {
-            "name": "github.com/miekg/dns",
-            "version": "v1.1.66"
-          },
-          {
             "name": "github.com/mitchellh/go-homedir",
             "version": "v1.1.0"
           },
@@ -319,10 +295,6 @@
           {
             "name": "github.com/munnerz/goautoneg",
             "version": "v0.0.0-20191010083416-a7dc8b61c822"
-          },
-          {
-            "name": "github.com/opentracing/opentracing-go",
-            "version": "v1.2.0"
           },
           {
             "name": "github.com/pkg/errors",
@@ -463,21 +435,21 @@
       "summary": {
         "freebsd": 38,
         "dotnet": 0,
-        "go": 72,
+        "go": 65,
         "java": 0,
         "node": 0,
         "php": 0,
         "python": 0,
         "ruby": 0,
         "rust": 0,
-        "total": 110
+        "total": 103
       }
     },
     "pkg": {
       "arch": "amd64",
       "app_version": "2025.8.0_6",
       "source": "pkg",
-      "generated": "2026-02-14T21:39:39Z",
+      "generated": "2026-02-19T22:47:00Z",
       "packages": {
         "freebsd": [
           {
