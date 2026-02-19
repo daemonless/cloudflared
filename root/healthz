@@ -12,7 +12,7 @@ if [ -n "$TUNNEL_TOKEN" ]; then
         exit 1
     fi
 else
-    # Fallback/Test Mode (DNS Proxy): Check TCP port
+    # CIT Mock Mode (Tokenless): Check TCP port
     if nc -z 127.0.0.1 "${METRICS_PORT}" >/dev/null 2>&1; then
         exit 0
     else

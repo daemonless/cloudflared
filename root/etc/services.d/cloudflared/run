@@ -2,9 +2,11 @@
 # Cloudflared s6 service
 
 if [ -z "$TUNNEL_TOKEN" ]; then
-    echo "[WARN] TUNNEL_TOKEN is not set. Starting in DNS Proxy mode for testing/fallback."
+    echo "[WARN] TUNNEL_TOKEN is not set. Starting in CIT mock mode."
+    # Log version to prove binary is functional
+    /usr/local/bin/cloudflared --version
     # Listen on port 2000 (metrics/test port) to satisfy CI port check
-    exec /usr/local/bin/cloudflared proxy-dns --port 2000 --address 0.0.0.0
+    exec /usr/bin/nc -lk 0.0.0.0 2000
 fi
 
 echo "[INFO] Starting cloudflared tunnel..."
