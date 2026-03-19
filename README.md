@@ -5,15 +5,28 @@ Source: dbuild templates
 
 # Cloudflared
 
-Cloudflare Tunnel client for exposing services securely.
+[![Build Status](https://img.shields.io/github/actions/workflow/status/daemonless/cloudflared/build.yaml?style=flat-square&label=Build&color=green)](https://github.com/daemonless/cloudflared/actions)
+[![Last Commit](https://img.shields.io/github/last-commit/daemonless/cloudflared?style=flat-square&label=Last+Commit&color=blue)](https://github.com/daemonless/cloudflared/commits)
+
+Tunneling daemon that proxies any local webserver through the Cloudflare network without DNS records or firewall changes.
 
 | | |
 |---|---|
 | **Port** | 2000 |
 | **Registry** | `ghcr.io/daemonless/cloudflared` |
-| **Docs** | [daemonless.io/images/cloudflared](https://daemonless.io/images/cloudflared/) |
 | **Source** | [https://github.com/cloudflare/cloudflared](https://github.com/cloudflare/cloudflared) |
 | **Website** | [https://developers.cloudflare.com/cloudflare-one/connections/connect-apps](https://developers.cloudflare.com/cloudflare-one/connections/connect-apps) |
+
+## Version Tags
+
+| Tag | Description | Best For |
+| :--- | :--- | :--- |
+| `latest` / `pkg` | **FreeBSD Quarterly**. Uses stable, tested packages. | Most users. Matches Linux Docker behavior. |
+| `pkg-latest` | **FreeBSD Latest**. Rolling package updates. | Newest FreeBSD packages. |
+
+## Prerequisites
+
+Before deploying, ensure your host environment is ready. See the [Quick Start Guide](https://daemonless.io/guides/quick-start) for host setup instructions.
 
 ## Deployment
 
@@ -32,6 +45,43 @@ services:
     restart: unless-stopped
 ```
 
+### AppJail Director
+
+**.env**:
+
+```
+DIRECTOR_PROJECT=cloudflared
+TUNNEL_TOKEN=YOUR_CLOUDFLARE_TOKEN_HERE
+TUNNEL_METRICS=0.0.0.0:2000
+```
+
+**appjail-director.yml**:
+
+```yaml
+options:
+  - virtualnet: ':<random> default'
+  - nat:
+services:
+  cloudflared:
+    name: cloudflared
+    options:
+      - container: 'boot args:--pull'
+    oci:
+      user: root
+      environment:
+        - TUNNEL_TOKEN: !ENV '${TUNNEL_TOKEN}'
+        - TUNNEL_METRICS: !ENV '${TUNNEL_METRICS}'
+```
+
+**Makejail**:
+
+```
+ARG tag=latest
+
+OPTION overwrite=force
+OPTION from=ghcr.io/daemonless/cloudflared:${tag}
+```
+
 ### Podman CLI
 
 ```bash
@@ -41,7 +91,6 @@ podman run -d --name cloudflared \
   -e TUNNEL_METRICS=0.0.0.0:2000 \
   ghcr.io/daemonless/cloudflared:latest
 ```
-Access at: `http://localhost:2000`
 
 ### Ansible
 
@@ -59,21 +108,27 @@ Access at: `http://localhost:2000`
       - "2000:2000"
 ```
 
-## Configuration
+Access at: `http://localhost:2000`
+
+## Parameters
+
 ### Environment Variables
 
 | Variable | Default | Description |
 |----------|---------|-------------|
 | `TUNNEL_TOKEN` | `YOUR_CLOUDFLARE_TOKEN_HERE` | Required: The Cloudflare Tunnel token. |
 | `TUNNEL_METRICS` | `0.0.0.0:2000` | Optional: Address to bind metrics server (default: 0.0.0.0:2000) |
+
 ### Ports
 
 | Port | Protocol | Description |
 |------|----------|-------------|
 | `2000` | TCP |  |
 
-## Notes
+**Architectures:** amd64
+**User:** `root` (UID/GID via PUID/PGID, defaults to 1000:1000)
+**Base:** FreeBSD 15.0
 
-- **Architectures:** amd64
-- **User:** `root` (UID/GID set via PUID/PGID)
-- **Base:** Built on `ghcr.io/daemonless/base` (FreeBSD)
+---
+
+Need help? Join our [Discord](https://discord.gg/Kb9tkhecZT) community.

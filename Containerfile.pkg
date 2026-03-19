@@ -12,7 +12,7 @@ ARG PACKAGES="cloudflared"
 
 # --- Metadata (Injected by Generator) ---
 LABEL org.opencontainers.image.title="Cloudflared" \
-      org.opencontainers.image.description="Cloudflare Tunnel client for exposing services securely." \
+      org.opencontainers.image.description="Tunneling daemon that proxies any local webserver through the Cloudflare network without DNS records or firewall changes." \
       org.opencontainers.image.source="https://github.com/daemonless/cloudflared" \
       org.opencontainers.image.url="https://developers.cloudflare.com/cloudflare-one/connections/connect-apps" \
       org.opencontainers.image.licenses="Apache-2.0" \

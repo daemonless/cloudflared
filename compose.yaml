@@ -4,13 +4,14 @@ x-daemonless:
   title: "Cloudflared"
   icon: ":simple-cloudflare:"
   category: "Infrastructure"
-  description: "Cloudflare Tunnel client for exposing services securely."
+  description: "Tunneling daemon that proxies any local webserver through the Cloudflare network without DNS records or firewall changes."
   upstream_url: "https://github.com/cloudflare/cloudflared"
   web_url: "https://developers.cloudflare.com/cloudflare-one/connections/connect-apps"
   freshports_url: "https://www.freshports.org/net/cloudflared/"
   user: "root"
   upstream_binary: false
-  
+  appjail: true
+
   docs:
     env:
       TUNNEL_TOKEN: "Required: The Cloudflare Tunnel token."
