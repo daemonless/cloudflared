@@ -10,7 +10,6 @@ Source: dbuild templates
 
 Tunneling daemon that proxies any local webserver through the Cloudflare network without DNS records or firewall changes.
 
-
 | | |
 |---|---|
 | **Port** | 2000 |
@@ -19,14 +18,12 @@ Tunneling daemon that proxies any local webserver through the Cloudflare network
 | **Website** | [https://developers.cloudflare.com/cloudflare-one/connections/connect-apps](https://developers.cloudflare.com/cloudflare-one/connections/connect-apps) |
 
 ## Version Tags
-
 | Tag | Description | Best For |
 | :--- | :--- | :--- |
-| `latest` / `pkg` | **FreeBSD Quarterly**. Uses stable, tested packages. | Most users. Matches Linux Docker behavior. |
-| `pkg-latest` | **FreeBSD Latest**. Rolling package updates. | Newest FreeBSD packages. |
+| `latest` / `pkg` | **FreeBSD Quarterly**. Uses stable, tested packages. | Most users — recommended. |
+| `pkg-latest` | **FreeBSD Latest**. Rolling package updates. | Staying current. |
 
 ## Prerequisites
-
 Before deploying, ensure your host environment is ready. See the [Quick Start Guide](https://daemonless.io/guides/quick-start) for host setup instructions.
 
 ## Deployment
@@ -36,21 +33,22 @@ Before deploying, ensure your host environment is ready. See the [Quick Start Gu
 ```yaml
 services:
   cloudflared:
-    image: ghcr.io/daemonless/cloudflared:latest
+    image: "ghcr.io/daemonless/cloudflared:latest"
     container_name: cloudflared
     environment:
-      - TUNNEL_TOKEN=YOUR_CLOUDFLARE_TOKEN_HERE
-      - TUNNEL_METRICS=0.0.0.0:2000
+      - TUNNEL_TOKEN=YOUR_CLOUDFLARE_TOKEN_HERE  # Required: The Cloudflare Tunnel token.
+      - TUNNEL_METRICS=0.0.0.0:2000  # Optional: Address to bind metrics server (default: 0.0.0.0:2000)
     ports:
-      - 2000:2000
+      - "2000:2000"
     restart: unless-stopped
 ```
 
 ### AppJail Director
-
 **.env**:
 
 ```
+# .env
+
 DIRECTOR_PROJECT=cloudflared
 TUNNEL_TOKEN=YOUR_CLOUDFLARE_TOKEN_HERE
 TUNNEL_METRICS=0.0.0.0:2000
@@ -59,6 +57,8 @@ TUNNEL_METRICS=0.0.0.0:2000
 **appjail-director.yml**:
 
 ```yaml
+# appjail-director.yml
+
 options:
   - virtualnet: ':<random> default'
   - nat:
@@ -67,6 +67,7 @@ services:
     name: cloudflared
     options:
       - container: 'boot args:--pull'
+      - expose: '2000:2000 proto:tcp'
     oci:
       user: root
       environment:
@@ -77,11 +78,14 @@ services:
 **Makejail**:
 
 ```
+# Makejail
+
 ARG tag=latest
 
 OPTION overwrite=force
 OPTION from=ghcr.io/daemonless/cloudflared:${tag}
 ```
+**Note**: Exposing ports in AppJail means that your service can be reached from remote hosts. If that is not your intention, do not expose the ports and communicate with the service using the IPv4 address assigned by the virtual network.
 
 ### Podman CLI
 
@@ -93,13 +97,28 @@ podman run -d --name cloudflared \
   ghcr.io/daemonless/cloudflared:latest
 ```
 
+### AppJail
+
+```bash
+appjail oci run -Pd \
+  -o overwrite=force \
+  -o container="args:--pull" \
+  -o virtualnet=":<random> default" \
+  -o nat \
+  -o expose="2000:2000 proto:tcp" \
+  -e TUNNEL_TOKEN=YOUR_CLOUDFLARE_TOKEN_HERE \
+  -e TUNNEL_METRICS=0.0.0.0:2000 \
+  ghcr.io/daemonless/cloudflared:latest cloudflared
+```
+**Note**: Exposing ports in AppJail means that your service can be reached from remote hosts. If that is not your intention, do not expose the ports and communicate with the service using the IPv4 address assigned by the virtual network.
+
 ### Ansible
 
 ```yaml
 - name: Deploy cloudflared
   containers.podman.podman_container:
     name: cloudflared
-    image: ghcr.io/daemonless/cloudflared:latest
+    image: "ghcr.io/daemonless/cloudflared:latest"
     state: started
     restart_policy: always
     env:
@@ -108,8 +127,6 @@ podman run -d --name cloudflared \
     ports:
       - "2000:2000"
 ```
-
-Access at: `http://localhost:2000`
 
 ## Parameters
 
@@ -128,7 +145,7 @@ Access at: `http://localhost:2000`
 
 **Architectures:** amd64
 **User:** `root` (UID/GID via PUID/PGID, defaults to 1000:1000)
-**Base:** FreeBSD 15.0
+**Base:** FreeBSD 15.1
 
 ---
 
