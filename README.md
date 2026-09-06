@@ -40,8 +40,11 @@ services:
       - TUNNEL_METRICS=0.0.0.0:2000  # Optional: Address to bind metrics server (default: 0.0.0.0:2000)
     ports:
       - "2000:2000"
-    restart: unless-stopped
+    # always (not unless-stopped) so FreeBSD's podman rc.d auto-starts it at boot
+    restart: always
 ```
+
+Save as `compose.yaml`, then run `podman-compose up -d`.
 
 ### AppJail Director
 **.env**:
@@ -85,6 +88,9 @@ ARG tag=latest
 OPTION overwrite=force
 OPTION from=ghcr.io/daemonless/cloudflared:${tag}
 ```
+
+Save the files above, then run `appjail-director up`.
+
 **Note**: Exposing ports in AppJail means that your service can be reached from remote hosts. If that is not your intention, do not expose the ports and communicate with the service using the IPv4 address assigned by the virtual network.
 
 ### Podman CLI
@@ -96,6 +102,8 @@ podman run -d --name cloudflared \
   -e TUNNEL_METRICS=0.0.0.0:2000 \
   ghcr.io/daemonless/cloudflared:latest
 ```
+
+Save as `run.sh`, then run `sh run.sh`.
 
 ### AppJail
 
@@ -110,7 +118,35 @@ appjail oci run -Pd \
   -e TUNNEL_METRICS=0.0.0.0:2000 \
   ghcr.io/daemonless/cloudflared:latest cloudflared
 ```
+
+Save as `run.sh`, then run `sh run.sh`.
+
 **Note**: Exposing ports in AppJail means that your service can be reached from remote hosts. If that is not your intention, do not expose the ports and communicate with the service using the IPv4 address assigned by the virtual network.
+
+### Bastille
+
+> [!WARNING]
+> Bastille's OCI support is **experimental**. It requires `buildah`, shares the host network stack (`inherit`), and persists image-declared volumes under `--data-path`.
+
+```yaml
+services:
+  cloudflared:
+    image: "ghcr.io/daemonless/cloudflared:latest"
+    container_name: cloudflared
+    network_mode: host  # jail shares host networking
+    environment:
+      - TUNNEL_TOKEN=YOUR_CLOUDFLARE_TOKEN_HERE
+      - TUNNEL_METRICS=0.0.0.0:2000
+```
+
+Save as `podman-compose.yml`, then run `bastille up`. Or via CLI:
+
+```bash
+bastille create -O \
+  --env TUNNEL_TOKEN=YOUR_CLOUDFLARE_TOKEN_HERE \
+  --env TUNNEL_METRICS=0.0.0.0:2000 \
+  cloudflared ghcr.io/daemonless/cloudflared:latest inherit
+```
 
 ### Ansible
 
@@ -127,6 +163,8 @@ appjail oci run -Pd \
     ports:
       - "2000:2000"
 ```
+
+Save as `cloudflared-deploy.yaml`, then run `ansible-playbook cloudflared-deploy.yaml`.
 
 ## Parameters
 
