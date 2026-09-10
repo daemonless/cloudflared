@@ -37,7 +37,7 @@ services:
     container_name: cloudflared
     environment:
       - TUNNEL_TOKEN=YOUR_CLOUDFLARE_TOKEN_HERE  # Required: The Cloudflare Tunnel token.
-      - TUNNEL_METRICS=0.0.0.0:2000  # Optional: Address to bind metrics server (default: 0.0.0.0:2000)
+      - TUNNEL_METRICS=0.0.0.0:2000  # Address to bind metrics server (default: 0.0.0.0:2000)
     ports:
       - "2000:2000"
     # always (not unless-stopped) so FreeBSD's podman rc.d auto-starts it at boot
@@ -69,7 +69,7 @@ services:
   cloudflared:
     name: cloudflared
     options:
-      - container: 'boot args:--pull'
+      - container: 'args:--pull'
       - expose: '2000:2000 proto:tcp'
     oci:
       user: root
@@ -85,13 +85,18 @@ services:
 
 ARG tag=latest
 
+OPTION container=boot
 OPTION overwrite=force
 OPTION from=ghcr.io/daemonless/cloudflared:${tag}
 ```
 
 Save the files above, then run `appjail-director up`.
 
-**Note**: Exposing ports in AppJail means that your service can be reached from remote hosts. If that is not your intention, do not expose the ports and communicate with the service using the IPv4 address assigned by the virtual network.
+
+> [!WARNING]
+> Exposing ports in AppJail means that your service can be reached from remote hosts. If that is not your intention, do not expose the ports and communicate with the service using the jail's IPv4 address or hostname assigned by the virtual network.
+>
+> To avoid exposing ports, just remove the `expose` option in your `appjail-director.yml` or from your command-line arguments.
 
 ### Podman CLI
 
@@ -107,6 +112,7 @@ Save as `run.sh`, then run `sh run.sh`.
 
 ### AppJail
 
+
 ```bash
 appjail oci run -Pd \
   -o overwrite=force \
@@ -119,27 +125,32 @@ appjail oci run -Pd \
   ghcr.io/daemonless/cloudflared:latest cloudflared
 ```
 
-Save as `run.sh`, then run `sh run.sh`.
+Save the files above, then run `sh run.sh`.
 
-**Note**: Exposing ports in AppJail means that your service can be reached from remote hosts. If that is not your intention, do not expose the ports and communicate with the service using the IPv4 address assigned by the virtual network.
+
+> [!WARNING]
+> Exposing ports in AppJail means that your service can be reached from remote hosts. If that is not your intention, do not expose the ports and communicate with the service using the jail's IPv4 address or hostname assigned by the virtual network.
+>
+> To avoid exposing ports, just remove the `expose` option in your `appjail-director.yml` or from your command-line arguments.
 
 ### Bastille
 
 > [!WARNING]
-> Bastille's OCI support is **experimental**. It requires `buildah`, shares the host network stack (`inherit`), and persists image-declared volumes under `--data-path`.
+> Bastille's OCI support is **experimental**. It requires `buildah` and shares the host network stack (`inherit`). Mount volumes with `--volume HOST JAIL`; without it, image-declared volumes are stored under `${bastille_volumesdir}/${jail}`.
 
 ```yaml
 services:
   cloudflared:
+    name: cloudflared
     image: "ghcr.io/daemonless/cloudflared:latest"
-    container_name: cloudflared
-    network_mode: host  # jail shares host networking
+    network:
+      - mode: host
     environment:
       - TUNNEL_TOKEN=YOUR_CLOUDFLARE_TOKEN_HERE
       - TUNNEL_METRICS=0.0.0.0:2000
 ```
 
-Save as `podman-compose.yml`, then run `bastille up`. Or via CLI:
+Save as `bastille-compose.yml`, then run `bastille up`. Or via CLI:
 
 ```bash
 bastille create -O \
@@ -173,7 +184,7 @@ Save as `cloudflared-deploy.yaml`, then run `ansible-playbook cloudflared-deploy
 | Variable | Default | Description |
 |----------|---------|-------------|
 | `TUNNEL_TOKEN` | `YOUR_CLOUDFLARE_TOKEN_HERE` | Required: The Cloudflare Tunnel token. |
-| `TUNNEL_METRICS` | `0.0.0.0:2000` | Optional: Address to bind metrics server (default: 0.0.0.0:2000) |
+| `TUNNEL_METRICS` | `0.0.0.0:2000` | Address to bind metrics server (default: 0.0.0.0:2000) |
 
 ### Ports
 

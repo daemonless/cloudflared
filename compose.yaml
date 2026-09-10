@@ -15,7 +15,9 @@ x-daemonless:
   docs:
     env:
       TUNNEL_TOKEN: "Required: The Cloudflare Tunnel token."
-      TUNNEL_METRICS: "Optional: Address to bind metrics server (default: 0.0.0.0:2000)"
+      TUNNEL_METRICS:
+        desc: "Address to bind metrics server (default: 0.0.0.0:2000)"
+        optional: true
 
 services:
   cloudflared:
