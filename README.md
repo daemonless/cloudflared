@@ -7,6 +7,7 @@ Source: dbuild templates
 
 [![Build Status](https://img.shields.io/github/actions/workflow/status/daemonless/cloudflared/build.yaml?style=flat-square&label=Build&color=green)](https://github.com/daemonless/cloudflared/actions)
 [![Last Commit](https://img.shields.io/github/last-commit/daemonless/cloudflared?style=flat-square&label=Last+Commit&color=blue)](https://github.com/daemonless/cloudflared/commits)
+[![OCI Pulls](https://img.shields.io/docker/pulls/daemonless/cloudflared?style=flat-square&label=OCI+Pulls&color=blue)](https://hub.docker.com/r/daemonless/cloudflared)
 
 Tunneling daemon that proxies any local webserver through the Cloudflare network without DNS records or firewall changes.
 
