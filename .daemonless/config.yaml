@@ -2,6 +2,9 @@ cit:
   port: 2000
 
 build:
+  architectures:
+    - amd64
+    - aarch64
   variants:
     - tag: pkg
       containerfile: Containerfile.pkg
