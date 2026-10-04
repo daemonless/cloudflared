@@ -99,41 +99,6 @@ Save the files above, then run `appjail-director up`.
 >
 > To avoid exposing ports, just remove the `expose` option in your `appjail-director.yml` or from your command-line arguments.
 
-### Podman CLI
-
-```bash
-podman run -d --name cloudflared \
-  -p 2000:2000 \
-  -e TUNNEL_TOKEN=YOUR_CLOUDFLARE_TOKEN_HERE \
-  -e TUNNEL_METRICS=0.0.0.0:2000 \
-  ghcr.io/daemonless/cloudflared:latest
-```
-
-Save as `run.sh`, then run `sh run.sh`.
-
-### AppJail
-
-
-```bash
-appjail oci run -Pd \
-  -o overwrite=force \
-  -o container="args:--pull" \
-  -o virtualnet=":<random> default" \
-  -o nat \
-  -o expose="2000:2000 proto:tcp" \
-  -e TUNNEL_TOKEN=YOUR_CLOUDFLARE_TOKEN_HERE \
-  -e TUNNEL_METRICS=0.0.0.0:2000 \
-  ghcr.io/daemonless/cloudflared:latest cloudflared
-```
-
-Save the files above, then run `sh run.sh`.
-
-
-> [!WARNING]
-> Exposing ports in AppJail means that your service can be reached from remote hosts. If that is not your intention, do not expose the ports and communicate with the service using the jail's IPv4 address or hostname assigned by the virtual network.
->
-> To avoid exposing ports, just remove the `expose` option in your `appjail-director.yml` or from your command-line arguments.
-
 ### Bastille
 
 > [!WARNING]
@@ -151,32 +116,7 @@ services:
       - TUNNEL_METRICS=0.0.0.0:2000
 ```
 
-Save as `bastille-compose.yml`, then run `bastille up`. Or via CLI:
-
-```bash
-bastille create -O \
-  --env TUNNEL_TOKEN=YOUR_CLOUDFLARE_TOKEN_HERE \
-  --env TUNNEL_METRICS=0.0.0.0:2000 \
-  cloudflared ghcr.io/daemonless/cloudflared:latest inherit
-```
-
-### Ansible
-
-```yaml
-- name: Deploy cloudflared
-  containers.podman.podman_container:
-    name: cloudflared
-    image: "ghcr.io/daemonless/cloudflared:latest"
-    state: started
-    restart_policy: always
-    env:
-      TUNNEL_TOKEN: "YOUR_CLOUDFLARE_TOKEN_HERE"
-      TUNNEL_METRICS: "0.0.0.0:2000"
-    ports:
-      - "2000:2000"
-```
-
-Save as `cloudflared-deploy.yaml`, then run `ansible-playbook cloudflared-deploy.yaml`.
+Save as `bastille-compose.yml`, then run `bastille up`.
 
 ## Parameters
 
@@ -193,7 +133,7 @@ Save as `cloudflared-deploy.yaml`, then run `ansible-playbook cloudflared-deploy
 |------|----------|-------------|
 | `2000` | TCP |  |
 
-**Architectures:** amd64
+**Architectures:** amd64, aarch64
 **User:** `root` (UID/GID via PUID/PGID, defaults to 1000:1000)
 **Base:** FreeBSD 15.1
 
