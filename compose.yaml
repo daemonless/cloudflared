@@ -14,7 +14,9 @@ x-daemonless:
 
   docs:
     env:
-      TUNNEL_TOKEN: "Required: The Cloudflare Tunnel token."
+      TUNNEL_TOKEN:
+        desc: "Required: The Cloudflare Tunnel token."
+        generate: false  # yours, from Cloudflare: fjord must not make one up
       TUNNEL_METRICS:
         desc: "Address to bind metrics server (default: 0.0.0.0:2000)"
         optional: true
