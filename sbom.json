@@ -1,11 +1,11 @@
 {
-  "generated": "2026-10-11T18:20:09Z",
+  "generated": "2026-10-11T22:55:23Z",
   "image": "cloudflared",
   "tags": {
     "pkg-amd64": {
-      "app_version": "2026.2.0_8",
+      "app_version": "2026.2.0_9",
       "arch": "amd64",
-      "generated": "2026-10-11T18:18:51Z",
+      "generated": "2026-10-11T22:49:00Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -259,7 +259,7 @@
               "APACHE20"
             ],
             "name": "cloudflared",
-            "version": "2026.2.0_8"
+            "version": "2026.2.0_9"
           },
           {
             "licenses": [
@@ -623,7 +623,7 @@
           {
             "name": "stdlib",
             "purl": "",
-            "version": "v1.26.8"
+            "version": "v1.26.9"
           },
           {
             "name": "zombiezen.com/go/capnproto2",
@@ -653,9 +653,9 @@
       }
     },
     "pkg-latest-amd64": {
-      "app_version": "2026.2.0_8",
+      "app_version": "2026.2.0_9",
       "arch": "amd64",
-      "generated": "2026-10-11T18:19:37Z",
+      "generated": "2026-10-11T22:52:46Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -909,7 +909,7 @@
               "APACHE20"
             ],
             "name": "cloudflared",
-            "version": "2026.2.0_8"
+            "version": "2026.2.0_9"
           },
           {
             "licenses": [
@@ -1273,7 +1273,7 @@
           {
             "name": "stdlib",
             "purl": "",
-            "version": "v1.26.8"
+            "version": "v1.27.2"
           },
           {
             "name": "zombiezen.com/go/capnproto2",
