@@ -37,7 +37,7 @@ services:
     image: "ghcr.io/daemonless/cloudflared:latest"
     container_name: cloudflared
     environment:
-      - TUNNEL_TOKEN=YOUR_CLOUDFLARE_TOKEN_HERE  # Required: The Cloudflare Tunnel token.
+      - TUNNEL_TOKEN=YOUR_CLOUDFLARE_TOKEN_HERE  # Cloudflare Tunnel token — create a tunnel at https://dash.cloudflare.com/one/ and copy the token from its install command
       - TUNNEL_METRICS=0.0.0.0:2000  # Address to bind metrics server (default: 0.0.0.0:2000)
     ports:
       - "2000:2000"
@@ -124,7 +124,7 @@ Save as `bastille-compose.yml`, then run `bastille up`.
 
 | Variable | Default | Description |
 |----------|---------|-------------|
-| `TUNNEL_TOKEN` | `YOUR_CLOUDFLARE_TOKEN_HERE` | Required: The Cloudflare Tunnel token. |
+| `TUNNEL_TOKEN` | `YOUR_CLOUDFLARE_TOKEN_HERE` | Cloudflare Tunnel token — create a tunnel at https://dash.cloudflare.com/one/ and copy the token from its install command |
 | `TUNNEL_METRICS` | `0.0.0.0:2000` | Address to bind metrics server (default: 0.0.0.0:2000) |
 
 ### Ports
