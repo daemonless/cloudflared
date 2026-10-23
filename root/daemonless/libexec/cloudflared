@@ -1,5 +1,5 @@
 #!/bin/sh
-# Cloudflared s6 service
+# Start cloudflared; /init has already dropped to the run user.
 
 if [ -z "$TUNNEL_TOKEN" ]; then
     echo "[WARN] TUNNEL_TOKEN is not set. Starting in CIT mock mode."

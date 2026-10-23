@@ -1,5 +1,5 @@
 ARG BASE_VERSION=15
-FROM ghcr.io/daemonless/base:${BASE_VERSION}
+FROM ghcr.io/daemonless/base-exec:${BASE_VERSION}
 
 ARG FREEBSD_ARCH=amd64
 ARG PACKAGES="cloudflared"
@@ -36,9 +36,13 @@ RUN pkg update && \
 
 # Copy root filesystem
 COPY root/ /
+RUN chmod +x /daemonless/libexec/cloudflared
+
+ENV DAEMONLESS_USER=root
+CMD ["/daemonless/libexec/cloudflared"]
 
 # Set permissions
-RUN chmod +x /etc/services.d/cloudflared/run /healthz
+RUN chmod +x /healthz
 
 # --- Expose (Injected by Generator) ---
 {%- if ports %}
