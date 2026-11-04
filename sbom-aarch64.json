@@ -1,11 +1,11 @@
 {
-  "generated": "2026-11-03T08:49:59Z",
+  "generated": "2026-11-04T12:48:39Z",
   "image": "cloudflared",
   "tags": {
     "pkg-aarch64": {
       "app_version": "2026.2.0_10",
       "arch": "aarch64",
-      "generated": "2026-11-03T08:48:32Z",
+      "generated": "2026-11-04T12:47:13Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -252,7 +252,7 @@
               "MPL20"
             ],
             "name": "ca_root_nss",
-            "version": "3.131"
+            "version": "3.132"
           },
           {
             "licenses": [
@@ -634,7 +634,7 @@
     "pkg-latest-aarch64": {
       "app_version": "2026.2.0_10",
       "arch": "aarch64",
-      "generated": "2026-11-03T08:48:37Z",
+      "generated": "2026-11-04T12:47:18Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -881,7 +881,7 @@
               "MPL20"
             ],
             "name": "ca_root_nss",
-            "version": "3.131"
+            "version": "3.132"
           },
           {
             "licenses": [
