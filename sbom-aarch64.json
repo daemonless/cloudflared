@@ -1,11 +1,11 @@
 {
-  "generated": "2026-11-04T12:48:39Z",
+  "generated": "2026-11-14T22:49:09Z",
   "image": "cloudflared",
   "tags": {
     "pkg-aarch64": {
       "app_version": "2026.2.0_10",
       "arch": "aarch64",
-      "generated": "2026-11-04T12:47:13Z",
+      "generated": "2026-11-14T22:47:02Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -634,7 +634,7 @@
     "pkg-latest-aarch64": {
       "app_version": "2026.2.0_10",
       "arch": "aarch64",
-      "generated": "2026-11-04T12:47:18Z",
+      "generated": "2026-11-14T22:47:06Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -909,7 +909,7 @@
               "BSD2CLAUSE"
             ],
             "name": "pkg",
-            "version": "2.8.4"
+            "version": "2.9.0"
           }
         ],
         "go": [
