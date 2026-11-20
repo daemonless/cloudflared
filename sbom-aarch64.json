@@ -1,11 +1,11 @@
 {
-  "generated": "2026-11-17T08:59:38Z",
+  "generated": "2026-11-20T09:20:30Z",
   "image": "cloudflared",
   "tags": {
     "pkg-aarch64": {
       "app_version": "2026.10.7",
       "arch": "aarch64",
-      "generated": "2026-11-17T08:57:59Z",
+      "generated": "2026-11-20T09:18:47Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -647,9 +647,9 @@
       }
     },
     "pkg-latest-aarch64": {
-      "app_version": "2026.2.0_10",
+      "app_version": "2026.10.7",
       "arch": "aarch64",
-      "generated": "2026-11-17T08:58:02Z",
+      "generated": "2026-11-20T09:18:51Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -903,7 +903,7 @@
               "APACHE20"
             ],
             "name": "cloudflared",
-            "version": "2026.2.0_10"
+            "version": "2026.10.7"
           },
           {
             "licenses": [
@@ -924,7 +924,7 @@
               "BSD2CLAUSE"
             ],
             "name": "pkg",
-            "version": "2.9.0"
+            "version": "2.9.2"
           }
         ],
         "go": [
@@ -946,7 +946,12 @@
           {
             "name": "github.com/chungthuang/quic-go",
             "purl": "",
-            "version": "v0.45.1-0.20250428085412-43229ad201fd"
+            "version": "v0.45.1-0.20260529212404-a9fddf436fc4"
+          },
+          {
+            "name": "github.com/cloudflare/backoff",
+            "purl": "",
+            "version": "v0.0.0-20240920015135-e46b80a3a7d0"
           },
           {
             "name": "github.com/cloudflare/cloudflared",
@@ -954,9 +959,14 @@
             "version": ""
           },
           {
+            "name": "github.com/coder/websocket",
+            "purl": "",
+            "version": "v1.8.7"
+          },
+          {
             "name": "github.com/coreos/go-oidc/v3",
             "purl": "",
-            "version": "v3.10.0"
+            "version": "v3.17.0"
           },
           {
             "name": "github.com/coreos/go-systemd/v22",
@@ -981,12 +991,12 @@
           {
             "name": "github.com/getsentry/sentry-go",
             "purl": "",
-            "version": "v0.16.0"
+            "version": "v0.43.0"
           },
           {
             "name": "github.com/go-chi/chi/v5",
             "purl": "",
-            "version": "v5.2.2"
+            "version": "v5.5.0"
           },
           {
             "name": "github.com/go-chi/cors",
@@ -996,12 +1006,12 @@
           {
             "name": "github.com/go-jose/go-jose/v4",
             "purl": "",
-            "version": "v4.1.0"
+            "version": "v4.1.6"
           },
           {
             "name": "github.com/go-logr/logr",
             "purl": "",
-            "version": "v1.4.3"
+            "version": "v1.4.4"
           },
           {
             "name": "github.com/go-logr/stdr",
@@ -1036,12 +1046,12 @@
           {
             "name": "github.com/gorilla/websocket",
             "purl": "",
-            "version": "v1.5.0"
+            "version": "v1.5.3"
           },
           {
             "name": "github.com/grpc-ecosystem/grpc-gateway/v2",
             "purl": "",
-            "version": "v2.26.3"
+            "version": "v2.29.0"
           },
           {
             "name": "github.com/ipostelnik/cli/v2",
@@ -1056,7 +1066,7 @@
           {
             "name": "github.com/klauspost/compress",
             "purl": "",
-            "version": "v1.18.0"
+            "version": "v1.20.3"
           },
           {
             "name": "github.com/mattn/go-colorable",
@@ -1124,9 +1134,19 @@
             "version": "v2.1.0"
           },
           {
+            "name": "github.com/shirou/gopsutil/v4",
+            "purl": "",
+            "version": "v4.26.3"
+          },
+          {
+            "name": "github.com/tklauser/go-sysconf",
+            "purl": "",
+            "version": "v0.3.16"
+          },
+          {
             "name": "go.opentelemetry.io/auto/sdk",
             "purl": "",
-            "version": "v1.1.0"
+            "version": "v1.2.1"
           },
           {
             "name": "go.opentelemetry.io/contrib/propagators",
@@ -1136,32 +1156,32 @@
           {
             "name": "go.opentelemetry.io/otel",
             "purl": "",
-            "version": "v1.35.0"
+            "version": "v1.45.0"
           },
           {
             "name": "go.opentelemetry.io/otel/exporters/otlp/otlptrace",
             "purl": "",
-            "version": "v1.26.0"
+            "version": "v1.45.0"
           },
           {
             "name": "go.opentelemetry.io/otel/metric",
             "purl": "",
-            "version": "v1.35.0"
+            "version": "v1.45.0"
           },
           {
             "name": "go.opentelemetry.io/otel/sdk",
             "purl": "",
-            "version": "v1.35.0"
+            "version": "v1.45.0"
           },
           {
             "name": "go.opentelemetry.io/otel/trace",
             "purl": "",
-            "version": "v1.35.0"
+            "version": "v1.45.0"
           },
           {
             "name": "go.opentelemetry.io/proto/otlp",
             "purl": "",
-            "version": "v1.2.0"
+            "version": "v1.11.0"
           },
           {
             "name": "go.uber.org/automaxprocs",
@@ -1171,57 +1191,57 @@
           {
             "name": "golang.org/x/crypto",
             "purl": "",
-            "version": "v0.38.0"
+            "version": "v0.58.0"
           },
           {
             "name": "golang.org/x/net",
             "purl": "",
-            "version": "v0.40.0"
+            "version": "v0.61.0"
           },
           {
             "name": "golang.org/x/oauth2",
             "purl": "",
-            "version": "v0.30.0"
+            "version": "v0.36.0"
           },
           {
             "name": "golang.org/x/sync",
             "purl": "",
-            "version": "v0.14.0"
+            "version": "v0.24.0"
           },
           {
             "name": "golang.org/x/sys",
             "purl": "",
-            "version": "v0.33.0"
+            "version": "v0.49.0"
           },
           {
             "name": "golang.org/x/term",
             "purl": "",
-            "version": "v0.32.0"
+            "version": "v0.47.0"
           },
           {
             "name": "golang.org/x/text",
             "purl": "",
-            "version": "v0.25.0"
+            "version": "v0.43.0"
           },
           {
             "name": "google.golang.org/genproto/googleapis/api",
             "purl": "",
-            "version": "v0.0.0-20250505200425-f936aa4a68b2"
+            "version": "v0.0.0-20260720211330-0afa2a65878a"
           },
           {
             "name": "google.golang.org/genproto/googleapis/rpc",
             "purl": "",
-            "version": "v0.0.0-20250512202823-5a2f75b736a9"
+            "version": "v0.0.0-20260720211330-0afa2a65878a"
           },
           {
             "name": "google.golang.org/grpc",
             "purl": "",
-            "version": "v1.72.2"
+            "version": "v1.83.2"
           },
           {
             "name": "google.golang.org/protobuf",
             "purl": "",
-            "version": "v1.36.6"
+            "version": "v1.36.11"
           },
           {
             "name": "gopkg.in/natefinch/lumberjack.v2",
@@ -1239,14 +1259,9 @@
             "version": "v3.0.1"
           },
           {
-            "name": "nhooyr.io/websocket",
-            "purl": "",
-            "version": "v1.8.7"
-          },
-          {
             "name": "stdlib",
             "purl": "",
-            "version": "v1.27.3"
+            "version": "v1.27.4"
           },
           {
             "name": "zombiezen.com/go/capnproto2",
@@ -1265,14 +1280,14 @@
       "summary": {
         "dotnet": 0,
         "freebsd": 39,
-        "go": 65,
+        "go": 68,
         "java": 0,
         "node": 0,
         "php": 0,
         "python": 0,
         "ruby": 0,
         "rust": 0,
-        "total": 104
+        "total": 107
       }
     }
   }
